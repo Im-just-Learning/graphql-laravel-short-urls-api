@@ -1,0 +1,20 @@
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+    "List of URLs."
+    Urls: [ShorterLink!]! @paginate(defaultCount: 10)
+}
+
+type Mutation {
+    "Adding new URL"
+    ShorterCreateShortUrl(url: String!): String
+}
+
+"Type for model ShorterLink"
+type ShorterLink {
+    id: ID!
+    url: String!
+    short_url: String!
+    clicks: Int!
+    created_at: DateTime!
+    updated_at: DateTime!
+}

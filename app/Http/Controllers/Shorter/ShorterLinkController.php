@@ -4,18 +4,19 @@ namespace App\Http\Controllers\Shorter;
 
 use App\Http\Controllers\Controller;
 use App\Models\Shorter\ShorterLink;
-use Illuminate\Http\Request;
+use function request;
+
 
 class ShorterLinkController extends Controller
 {
-    public function redirecting($url)
+    public function redirecting()
     {
-        $short_url = url('/urls') . '/' . $url;
+        $short_url = request()->url();
 
         $clickedLink = ShorterLink::where('short_url', $short_url)->first();
 
         if (!$clickedLink){
-            dd('Ссылки нет');
+            return 'Ссылки нет';
         } else {
             $clickedLink->clicks ++;
             $clickedLink->save();

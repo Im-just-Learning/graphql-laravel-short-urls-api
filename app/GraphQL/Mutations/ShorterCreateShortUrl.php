@@ -8,8 +8,9 @@ use Illuminate\Support\Str;
 final class ShorterCreateShortUrl
 {
     /**
-     * @param  null  $_
-     * @param  array{}  $args
+     * @param $_
+     * @param array $args
+     * @return mixed|string
      */
     public function __invoke($_, array $args)
     {
@@ -24,11 +25,18 @@ final class ShorterCreateShortUrl
         return $newShorterLink->short_url;
     }
 
+    /**
+     * @return string
+     */
     protected function shortingLink(){
         $shortUrl = url('/urls') . '/' . Str::random(5);
         return $shortUrl;
     }
 
+    /**
+     * @param $url
+     * @return mixed|string
+     */
     protected function checkingOnHttp($url){
         if(!Str::contains($url, ['http://', 'https://'])){
             $url = 'http://' . $url;
